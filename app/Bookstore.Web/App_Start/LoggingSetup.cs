@@ -9,13 +9,13 @@ namespace Bookstore.Web
 {
     public static class LoggingSetup
     {
-        public static void ConfigureLogging()
+        public static void ConfigureLogging(BookstoreConfiguration config)
         {
-            var config = new LoggingConfiguration();
+            var nlogConfig = new LoggingConfiguration();
 
             Target loggingTarget;
 
-            if (BookstoreConfiguration.GetSetting("Services/LoggingService") == "aws")
+            if (config.GetSetting("Services/LoggingService") == "aws")
             {
                 loggingTarget = new AWSTarget { LogGroup = Constants.AppName };
             }
@@ -24,11 +24,11 @@ namespace Bookstore.Web
                 loggingTarget = new DebuggerTarget();
             }
 
-            config.AddTarget("aws", loggingTarget);
+            nlogConfig.AddTarget("aws", loggingTarget);
 
-            config.LoggingRules.Add(new LoggingRule("*", LogLevel.Info, loggingTarget));
+            nlogConfig.LoggingRules.Add(new LoggingRule("*", NLog.LogLevel.Info, loggingTarget));
 
-            LogManager.Configuration = config;
+            LogManager.Configuration = nlogConfig;
         }
     }
 }
