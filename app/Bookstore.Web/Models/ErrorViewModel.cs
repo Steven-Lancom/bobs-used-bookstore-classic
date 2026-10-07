@@ -1,3 +1,4 @@
+#nullable disable
 namespace Bookstore.Web.ViewModel
 {
     public class ErrorViewModel

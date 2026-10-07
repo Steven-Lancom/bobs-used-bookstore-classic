@@ -1,3 +1,4 @@
+#nullable disable
 ﻿using Bookstore.Domain;
 using Bookstore.Domain.ReferenceData;
 using System.Collections.Generic;
