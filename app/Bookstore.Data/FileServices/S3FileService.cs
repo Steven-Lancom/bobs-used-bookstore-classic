@@ -11,17 +11,19 @@ namespace Bookstore.Data.FileServices
     public class S3FileService : IFileService
     {
         private readonly TransferUtility transferUtility;
+        private readonly BookstoreConfiguration _configuration;
 
-        public S3FileService(IAmazonS3 s3Client)
+        public S3FileService(IAmazonS3 s3Client, BookstoreConfiguration configuration)
         {
             transferUtility = new TransferUtility(s3Client);
+            _configuration = configuration;
         }
 
         public async Task DeleteAsync(string filePath)
         {
             if (string.IsNullOrWhiteSpace(filePath)) return;
 
-            var bucketName = BookstoreConfiguration.GetSetting("Files/BucketName");
+            var bucketName = _configuration.GetSetting("Files/BucketName");
             var request = new DeleteObjectRequest
             {
                 BucketName = bucketName,
@@ -35,9 +37,9 @@ namespace Bookstore.Data.FileServices
         {
             if (contents == null) return null;
 
-            var bucketName = BookstoreConfiguration.GetSetting("Files/BucketName");
+            var bucketName = _configuration.GetSetting("Files/BucketName");
             var uniqueFilename = $"{Path.GetFileNameWithoutExtension(Path.GetRandomFileName())}{Path.GetExtension(filename)}";
-            var cloudFrontDomain = BookstoreConfiguration.GetSetting("Files/CloudFrontDomain");
+            var cloudFrontDomain = _configuration.GetSetting("Files/CloudFrontDomain");
 
             var request = new TransferUtilityUploadRequest
             {
