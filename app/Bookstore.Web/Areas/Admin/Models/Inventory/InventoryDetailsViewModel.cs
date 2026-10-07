@@ -1,3 +1,4 @@
+#nullable disable
 ﻿using Bookstore.Domain.Books;
 
 namespace Bookstore.Web.Areas.Admin.Models.Inventory

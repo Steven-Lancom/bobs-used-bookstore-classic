@@ -1,3 +1,4 @@
+#nullable disable
 ﻿using Bookstore.Domain.Carts;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

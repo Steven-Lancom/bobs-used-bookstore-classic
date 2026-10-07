@@ -1,3 +1,4 @@
+#nullable disable
 ﻿using Bookstore.Domain;
 using Bookstore.Domain.Orders;
 using System;

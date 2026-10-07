@@ -1,3 +1,4 @@
+#nullable disable
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 using Bookstore.Domain.Books;
